@@ -1,4 +1,4 @@
-import 'package:emojiscraper/scraper.dart' as emojiscraper;
+import 'package:emojiscraper/emojiscraper.dart' as emojiscraper;
 import 'package:test/test.dart';
 
 void main() {

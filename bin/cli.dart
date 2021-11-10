@@ -1,7 +1,7 @@
 import 'dart:io' show exit, File;
 
 import 'package:args/args.dart' show ArgParser, ArgResults;
-import 'package:emojiscraper/scraper.dart' as scraper;
+import 'package:emojiscraper/emojiscraper.dart' as scraper;
 import 'package:interact/interact.dart' show Select;
 import 'package:yaml/yaml.dart' show loadYaml;
 
