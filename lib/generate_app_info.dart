@@ -21,8 +21,8 @@ class _AppInfoBuilder implements Builder {
     String packageGitHash = '';
 
     try {
-      final git =
-          await Process.run('bash', ['-c', 'git rev-parse --short HEAD']);
+      final git = await Process.run('git', ['rev-parse', '--short', 'HEAD']);
+
       if (git.exitCode == 0) {
         packageGitHash = git.stdout.toString().trim();
       }

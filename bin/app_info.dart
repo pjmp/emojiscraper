@@ -3,7 +3,7 @@
 // Information about the package from pubspec
 final packageName = 'emojiscraper';
 final packageVersion = '0.2.0';
-final packageDescription = 'Scrape emoji from https://unicode.org.';
+final packageDescription = 'Tiny tool to scrape emoji from https://unicode.org.';
 
 // git hash
-final packageGitHash = '889f327';
+final packageGitHash = '539d1bb';

@@ -131,7 +131,8 @@ run({required List<String> args}) async {
 
       // show version
       if (cli['version']) {
-        print('v${app_info.packageVersion}');
+        print(
+            '${app_info.packageName} ${app_info.packageVersion} (${app_info.packageGitHash})');
         exit(0);
       }
 
