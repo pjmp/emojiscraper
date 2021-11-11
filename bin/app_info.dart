@@ -6,4 +6,4 @@ final packageVersion = '0.2.0';
 final packageDescription = 'Tiny tool to scrape emoji from https://unicode.org.';
 
 // git hash
-final packageGitHash = '539d1bb';
+final packageGitHash = 'ee7cb56';
