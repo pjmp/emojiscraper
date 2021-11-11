@@ -1,9 +1,11 @@
-# emojiscraper
+# emojiscraper [![pub.dev](https://img.shields.io/pub/v/emojiscraper.svg)](https://pub.dev/packages/emojiscraper) ![](https://img.shields.io/librariesio/github/pjmp/emojiscraper?style=plastic) ![](https://img.shields.io/github/license/pjmp/emojiscraper) ![](https://img.shields.io/badge/contributors-welcomed-green)
+
 
 > Tiny tool to scrape emoji from https://unicode.org.
 
 
 # Demo
+
 - TODO
 
 
@@ -39,3 +41,8 @@ OPTIONS:
           [path]           Write to path.
           [stdout]         Write to stdout.
 ```
+
+
+# Development
+
+This project uses [build_runner](https://pub.dev/packages/build_runner) to get information at compile time so make sure to use [Makefile](./Makefile) to build, run or compile.
