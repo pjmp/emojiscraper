@@ -1,4 +1,4 @@
-import 'dart:convert' show utf8;
+import 'dart:convert' show utf8, json;
 import 'dart:io' show HttpClient, HttpClientRequest, Platform, exit;
 
 import 'package:html/dom.dart' show Document;
@@ -38,8 +38,18 @@ Future<HttpClientRequest> client({required String url}) async {
   return request;
 }
 
+/// Note: This will [exit] with message printed to stdout if status is not 200
 Future<String> downloadEmojiData(String version) async {
-  final request = await client(url: '$_baseUrl/$version/emoji-sequences.txt');
+  String url;
+
+  // v1.0 doesn't have the file `emoji-sequences.txt` in server
+  if (version == '1.0') {
+    url = '$_baseUrl/$version/emoji-data.txt';
+  } else {
+    url = '$_baseUrl/$version/emoji-sequences.txt';
+  }
+
+  final request = await client(url: url);
 
   final response = await request.close();
 
@@ -51,4 +61,8 @@ Future<String> downloadEmojiData(String version) async {
   final contents = (await response.transform(utf8.decoder).toList()).join();
 
   return contents;
+}
+
+Map<String, dynamic> parseTextToJson(String text) {
+  throw 'not yet implemented!';
 }

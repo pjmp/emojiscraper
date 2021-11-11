@@ -1,0 +1,16 @@
+# Read about `build.yaml` at https://pub.dev/packages/build_config
+targets:
+  $default:
+    builders:
+      emojiscraper:
+        enabled: true
+
+builders:
+  emojiscraper:
+    import: "package:emojiscraper/generate_app_info.dart"
+    builder_factories: ["buildAppInfo"]
+    build_extensions: {"pubspec.yaml": ["bin/app_info.dart"]}
+    defaults:
+      options:
+        output: "bin/app_info.dart"
+    build_to: source
