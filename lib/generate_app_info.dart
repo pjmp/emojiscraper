@@ -1,5 +1,6 @@
+/// Adapted from https://github.com/kevmoo/build_version/blob/master/lib/builder.dart
+
 import 'dart:io' show File, Process;
-import 'dart:async';
 
 import 'package:build/build.dart';
 
@@ -16,7 +17,7 @@ class _AppInfoBuilder implements Builder {
 
   @override
   Future build(BuildStep buildStep) async {
-    final packageInfo = loadYaml(File('pubspec.yaml').readAsStringSync());
+    final packageInfo = loadYaml(await File('pubspec.yaml').readAsString());
 
     String packageGitHash = '';
 

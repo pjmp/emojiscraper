@@ -1,8 +1,8 @@
 import 'package:emojiscraper/emojiscraper.dart' as emojiscraper;
-import 'package:test/test.dart';
+import 'package:test/test.dart' as test;
 
 void main() {
-  test('calculate', () {
-    expect(emojiscraper.fetchVersions(), 42);
+  test.test('parseTextToJson', () {
+    test.inExclusiveRange(emojiscraper.parseTextToJson('').length, 0);
   });
 }

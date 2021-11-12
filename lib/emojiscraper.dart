@@ -1,12 +1,13 @@
-import 'dart:convert' show utf8, json;
-import 'dart:io' show HttpClient, HttpClientRequest, Platform, exit;
+import 'dart:convert' show JsonEncoder, LineSplitter, utf8;
+import 'dart:io' show File, HttpClient, HttpClientRequest, Platform, exit;
 
 import 'package:html/dom.dart' show Document;
 
 final String _baseUrl = Platform.environment['UNICODE_ORG_URL'] ??
     'https://unicode.org/Public/emoji';
 
-Future<List<String>> fetchVersions() async {
+/// Scrape https://unicode.org/Public/emoji, for available version.
+Future<List<String>> fetchAvailableVersions() async {
   final request = await client(url: _baseUrl);
 
   final response = await request.close();
@@ -30,6 +31,7 @@ Future<List<String>> fetchVersions() async {
   return versions;
 }
 
+/// Generic [HttpClientRequest] that does GET request.
 Future<HttpClientRequest> client({required String url}) async {
   final client = HttpClient();
 
@@ -38,8 +40,9 @@ Future<HttpClientRequest> client({required String url}) async {
   return request;
 }
 
+/// Fetch emoji data.
 /// Note: This will [exit] with message printed to stdout if status is not 200
-Future<String> downloadEmojiData(String version) async {
+Future<String> fetchEmojiData(String version) async {
   String url;
 
   // v1.0 doesn't have the file `emoji-sequences.txt` in server
@@ -63,6 +66,39 @@ Future<String> downloadEmojiData(String version) async {
   return contents;
 }
 
-Map<String, dynamic> parseTextToJson(String text) {
-  throw 'not yet implemented!';
+/// Takes raw string and formats it to json.
+/// If you decode the result of the string returned by this then, the resulting object is represented as:
+///```dart
+/// typedef Emoji = Map<String, List<String>>;
+///
+/// typedef Json = List<Map<String, Emoji>>
+/// ```
+String parseTextToJson(String text) {
+  final lines = LineSplitter().convert(text);
+
+  List<Map<String, Object>> emojis = [];
+
+  for (final line in lines) {
+    if (!line.startsWith(RegExp(r'[0-9]'))) {
+      continue;
+    }
+
+    final item = line.split('(');
+
+    if (item.length != 2) {
+      continue;
+    }
+
+    final head = item.first;
+    final tail = item.last;
+
+    final description = head.split(';')[2].split('#')[0].trim();
+    final emoji = tail.substring(0, tail.length - 1).split('..');
+
+    emojis.add({'description': description, 'emoji': emoji});
+  }
+
+  final encoder = JsonEncoder.withIndent('  ');
+
+  return encoder.convert(emojis);
 }

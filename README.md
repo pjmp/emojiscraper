@@ -1,20 +1,16 @@
 # emojiscraper [![pub.dev](https://img.shields.io/pub/v/emojiscraper.svg)](https://pub.dev/packages/emojiscraper) ![](https://img.shields.io/librariesio/github/pjmp/emojiscraper?style=plastic) ![](https://img.shields.io/github/license/pjmp/emojiscraper) ![](https://img.shields.io/badge/contributors-welcomed-green)
 
-
 > Tiny tool to scrape emoji from https://unicode.org.
-
 
 # Demo
 
 - TODO
-
 
 # Installation
 
 ```bash
 dart pub global activate emojiscraper
 ```
-
 
 # Available options
 
@@ -42,6 +38,9 @@ OPTIONS:
           [stdout]         Write to stdout.
 ```
 
+# Todo
+
+- [ ] Allow users to select multiple versions
 
 # Development
 
