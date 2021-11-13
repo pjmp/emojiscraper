@@ -4,7 +4,7 @@
 
 # Demo
 
-- TODO
+[![A Demo](./demo.svg)](./demo.svg)
 
 # Installation
 
