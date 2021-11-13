@@ -188,9 +188,6 @@ run({required List<String> args}) async {
 
         spinner.done();
 
-        // sort the list in descending order
-        versions.sort((a, b) => double.parse(a) > double.parse(b) ? 0 : 1);
-
         // if `--interactive` is passed
         if (interactive != null && interactive == true) {
           // prompt user to select from available versions
@@ -223,11 +220,11 @@ run({required List<String> args}) async {
         }
       } else if (writeTo == 'path') {
         if (format == 'raw') {
-          final file = await File('emoji-sequences.txt').create();
+          final file = await File('$edition-emoji-sequences.txt').create();
           await file.writeAsString(data);
         } else if (format == 'json') {
           final json = scraper.parseTextToJson(data);
-          final file = await File('emoji-sequences.json').create();
+          final file = await File('$edition-emoji-sequences.json').create();
           await file.writeAsString(json);
         } else {
           // this case should not execute..

@@ -28,6 +28,9 @@ Future<List<String>> fetchAvailableVersions() async {
     return acc;
   });
 
+  // sort the list in descending order
+  versions.sort((a, b) => double.parse(a) > double.parse(b) ? 0 : 1);
+
   return versions;
 }
 
@@ -87,17 +90,29 @@ String parseTextToJson(String text) {
       continue;
     }
 
-    final item = line.split('(');
+    final reg = RegExp(r'\(.*?\)');
+
+    final item = line.split(reg);
 
     if (item.length != 2) {
       continue;
     }
 
+    final emoji = line
+        .splitMapJoin((reg), onMatch: (m) => '${m[0]}', onNonMatch: (n) => '')
+        .replaceAll(RegExp(r'\(|\)'), '')
+        .split('..');
+
+    String description;
+
     final head = item.first;
     final tail = item.last;
 
-    final description = head.split(';')[2].split('#')[0].trim();
-    final emoji = tail.substring(0, tail.length - 1).split('..');
+    if (tail.isEmpty) {
+      description = head.split(';')[2].split('#')[0].trim();
+    } else {
+      description = tail.trim();
+    }
 
     emojis.add({'description': description, 'emoji': emoji});
   }
