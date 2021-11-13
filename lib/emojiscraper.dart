@@ -1,5 +1,5 @@
 import 'dart:convert' show JsonEncoder, LineSplitter, utf8;
-import 'dart:io' show File, HttpClient, HttpClientRequest, Platform, exit;
+import 'dart:io' show HttpClient, HttpClientRequest, Platform, exit;
 
 import 'package:html/dom.dart' show Document;
 
@@ -69,9 +69,13 @@ Future<String> fetchEmojiData(String version) async {
 /// Takes raw string and formats it to json.
 /// If you decode the result of the string returned by this then, the resulting object is represented as:
 ///```dart
-/// typedef Emoji = Map<String, List<String>>;
+/// // if only dart had union types or tuples
+/// typedef Json = List<Map<String, Object>>;
 ///
-/// typedef Json = List<Map<String, Emoji>>
+/// Json json = {
+///   'description': 'flag: Nepal',
+///    'emoji': ['🇳🇵']
+/// }
 /// ```
 String parseTextToJson(String text) {
   final lines = LineSplitter().convert(text);

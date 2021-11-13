@@ -1,6 +1,6 @@
 ## 0.2.0
 
-- TODO.
+- First proper release.
 
 ## 0.1.1
 

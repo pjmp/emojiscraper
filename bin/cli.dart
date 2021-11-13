@@ -67,7 +67,7 @@ ArgParser _generate(ArgParser parser) {
         allowedHelp: allowed,
         defaultsTo: option['defaultsTo']?.toString(),
         valueHelp: name.toUpperCase(),
-        // anything more to add?
+        // anything else to add?
       );
     }
   }
@@ -87,7 +87,7 @@ String _usage() {
   return usage;
 }
 
-String _help(String appUsage) {
+Never _help(String appUsage) {
   final help = '''
 ${app_info.packageName} ${app_info.packageVersion}
 ${app_info.packageDescription}
@@ -97,27 +97,43 @@ ${_usage()}
 OPTIONS:
 $appUsage''';
 
-  return help;
+  print(help);
+
+  exit(0);
 }
 
-void _printNoArgsHelp() {
+Never _printNoArgsHelp() {
   print('''
 error: --format=<FORMAT> --writeTo=<WRITETO> is required
 
 ${_usage()}
 
 For more information try --help''');
+  exit(1);
+}
+
+Never _version() {
+  print(
+      '${app_info.packageName} ${app_info.packageVersion} (${app_info.packageGitHash})');
+  exit(0);
 }
 
 /// catch all for any errors
-void _printAllErrors(Object e) {
+Never _printAllErrors(Object error) {
   print('''
-${e.toString().replaceAll(RegExp(r'^(.*?Exception):'), 'error:')}
+${error.toString().replaceAll(RegExp(r'^(.*?Exception):'), 'error:')}
 
 ${_usage()}''');
+
+  exit(1);
 }
 
-Future<void> _printAvailableVersions() async {
+Never _invalidState() {
+  print('Invalid option.\nRun `--help` to see all available options.');
+  exit(1);
+}
+
+Future<Never> _printAvailableVersions() async {
   final spin = _spinner(message: 'Fetching available versions');
 
   final versions = await scraper.fetchAvailableVersions();
@@ -144,15 +160,12 @@ run({required List<String> args}) async {
     if (_validFlagsOrOptionsPassed(cli)) {
       // show help
       if (cli['help']) {
-        print(_help(app.usage));
-        exit(0);
+        _help(app.usage);
       }
 
       // show version
       if (cli['version']) {
-        print(
-            '${app_info.packageName} ${app_info.packageVersion} (${app_info.packageGitHash})');
-        exit(0);
+        _version();
       }
 
       // list versions
@@ -206,8 +219,7 @@ run({required List<String> args}) async {
           print(json);
         } else {
           // this case should not execute..
-          print('Invalid option');
-          exit(1);
+          _invalidState();
         }
       } else if (writeTo == 'path') {
         if (format == 'raw') {
@@ -219,19 +231,15 @@ run({required List<String> args}) async {
           await file.writeAsString(json);
         } else {
           // this case should not execute..
-          print('Invalid option');
-          exit(1);
+          _invalidState();
         }
       } else {
         _printNoArgsHelp();
-        exit(1);
       }
     } else {
       _printNoArgsHelp();
-      exit(1);
     }
   } catch (e) {
     _printAllErrors(e);
-    exit(1);
   }
 }
