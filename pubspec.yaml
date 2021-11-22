@@ -1,6 +1,11 @@
 name: emojiscraper
-description: Tiny tool to scrape emoji from https://unicode.org.
-version: 0.2.0
+
+description: >-
+ Tiny tool to scrape emoji from https://unicode.org.
+ This scrapes emoji-data.txt or emoji-sequences.txt and writes to file/stdout as plaintext/json.
+
+version: 0.2.1
+
 homepage: https://github.com/pjmp/emojiscraper
 
 executables:

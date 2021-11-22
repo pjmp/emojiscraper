@@ -1,3 +1,8 @@
+## 0.2.1
+
+- add an example
+- update description to have more than 80 characters
+
 ## 0.2.0
 
 - First proper release.
