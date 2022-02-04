@@ -16,6 +16,8 @@ environment:
 
 platforms:
   linux:
+  windows:
+  macos:
 
 dev_dependencies:
   build_runner: ^2.1.5
