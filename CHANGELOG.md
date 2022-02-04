@@ -1,3 +1,7 @@
+## 0.2.4
+
+- apply `dart format .` to generated files too
+
 ## 0.2.3
 
 - add ignored file back
