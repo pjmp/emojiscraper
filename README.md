@@ -4,7 +4,7 @@
 
 # Demo
 
-[![A Demo](./demo.svg)](./demo.svg)
+[![A Demo](./demo.gif)](./demo.gif)
 
 # Installation
 
