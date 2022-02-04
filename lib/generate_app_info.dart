@@ -35,7 +35,8 @@ class _AppInfoBuilder implements Builder {
 // Information about the package from pubspec
 final packageName = '${packageInfo['name']}';
 final packageVersion = '${packageInfo['version']}';
-final packageDescription = '${packageInfo['description']}';
+final packageDescription =
+  '${packageInfo['description']}';
 
 // git hash
 final packageGitHash = '$packageGitHash';

@@ -3,8 +3,7 @@ build: clean
 	dart compile exe bin/emojiscraper.dart
 
 clean:
-	rm bin/emojiscraper.exe
-	dart run build_runner clean
+	if [ -f bin/emojiscraper.exe ]; then rm bin/emojiscraper.exe; fi;
 
 publish: clean build
 	pub publish
