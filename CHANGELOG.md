@@ -1,3 +1,8 @@
+## 0.2.3
+
+- add ignored file back
+- update `build` package
+
 ## 0.2.1
 
 - add an example

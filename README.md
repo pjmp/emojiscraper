@@ -1,4 +1,4 @@
-# emojiscraper [![pub.dev](https://img.shields.io/pub/v/emojiscraper.svg)](https://pub.dev/packages/emojiscraper) ![](https://img.shields.io/librariesio/github/pjmp/emojiscraper?style=plastic) ![](https://img.shields.io/github/license/pjmp/emojiscraper) ![](https://img.shields.io/badge/contributors-welcomed-green)
+# emojiscraper [![pub.dev](https://img.shields.io/pub/v/emojiscraper.svg)](https://pub.dev/packages/emojiscraper) ![license](https://img.shields.io/github/license/pjmp/emojiscraper) ![contributors](https://img.shields.io/badge/contributors-welcomed-green)
 
 > Tiny tool to scrape emoji from https://unicode.org.
 
