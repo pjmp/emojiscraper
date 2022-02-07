@@ -4,7 +4,8 @@
 final packageName = 'emojiscraper';
 final packageVersion = '0.2.4';
 final packageDescription =
-    'Tiny tool to scrape emoji from https://unicode.org. This scrapes emoji-data.txt or emoji-sequences.txt and writes to file/stdout as plaintext/json.';
+    """Tiny tool to scrape emoji from https://unicode.org.
+This scrapes emoji-data.txt or emoji-sequences.txt and writes to file/stdout as plaintext/json.""";
 
 // git hash
-final packageGitHash = 'ce7cfa6';
+final packageGitHash = 'e9b7123';

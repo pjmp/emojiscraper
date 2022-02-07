@@ -36,7 +36,7 @@ class _AppInfoBuilder implements Builder {
 final packageName = '${packageInfo['name']}';
 final packageVersion = '${packageInfo['version']}';
 final packageDescription =
-  '${packageInfo['description']}';
+    """${packageInfo['description']}""";
 
 // git hash
 final packageGitHash = '$packageGitHash';

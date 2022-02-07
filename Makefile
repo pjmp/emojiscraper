@@ -4,6 +4,7 @@ build: clean
 
 clean:
 	if [ -f bin/emojiscraper.exe ]; then rm bin/emojiscraper.exe; fi;
+	dart run build_runner clean
 
 publish: clean build
 	pub publish
