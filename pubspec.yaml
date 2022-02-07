@@ -4,7 +4,7 @@ description: |-
   Tiny tool to scrape emoji from https://unicode.org.
   This scrapes emoji-data.txt or emoji-sequences.txt and writes to file/stdout as plaintext/json.
 
-version: 0.2.4
+version: 0.2.5
 
 homepage: https://github.com/pjmp/emojiscraper
 

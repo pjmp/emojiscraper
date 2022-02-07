@@ -7,7 +7,7 @@ clean:
 	dart run build_runner clean
 
 publish: clean build
-	pub publish
+	dart pub publish $(filter-out $@,$(MAKECMDGOALS))
 
 run:
 	dart run build_runner run --delete-conflicting-outputs bin/emojiscraper.dart -- $(filter-out $@,$(MAKECMDGOALS))

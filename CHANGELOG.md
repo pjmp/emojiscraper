@@ -1,16 +1,20 @@
+## 0.2.5
+
+- Refactor
+
 ## 0.2.4
 
-- apply `dart format .` to generated files too
+- Apply `dart format .` to generated files too
 
 ## 0.2.3
 
-- add ignored file back
-- update `build` package
+- Add ignored file back
+- Update `build` package
 
 ## 0.2.1
 
-- add an example
-- update description to have more than 80 characters
+- Add an example
+- Update description to have more than 80 characters
 
 ## 0.2.0
 
