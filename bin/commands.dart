@@ -38,8 +38,7 @@ For more information try --help''');
 }
 
 Never _version() {
-  print(
-      '${app_info.packageName} ${app_info.packageVersion} (${app_info.packageGitHash})');
+  print('${app_info.packageName} ${app_info.packageVersion}');
   exit(0);
 }
 
