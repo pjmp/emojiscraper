@@ -1,5 +1,5 @@
 import 'cli.dart' as cli;
 
-void main(List<String> arguments) async {
+Future<void> main(List<String> arguments) async {
   await cli.run(args: arguments);
 }
