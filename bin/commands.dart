@@ -74,3 +74,29 @@ SpinnerState _spinner(String message) {
     rightPrompt: (done) => done ? '' : message,
   ).interact();
 }
+
+Future<String> _getEdition(bool interactive) async {
+  String edition;
+
+  final versionSpinner = _spinner('Fetching available versions ...');
+
+  final versions = await scraper.fetchAvailableVersions();
+
+  versionSpinner.done();
+
+  // if `--interactive` is passed
+  if (interactive == true) {
+    // prompt user to select from available versions
+    final selection = Select(
+      prompt: 'Select version of emoji',
+      options: versions,
+    ).interact();
+
+    edition = versions[selection];
+  } else {
+    // just select latest available version if `--interactive` is not passed
+    edition = versions.first;
+  }
+
+  return edition;
+}

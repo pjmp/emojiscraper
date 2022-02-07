@@ -1,6 +1,6 @@
 /// Adapted from https://github.com/kevmoo/build_version/blob/master/lib/builder.dart
 
-import 'dart:io' show File, Process;
+import 'dart:io' show File;
 
 import 'package:build/build.dart';
 

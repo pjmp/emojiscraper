@@ -17,96 +17,75 @@ Future<void> run({required List<String> args}) async {
 
     final cli = app.parse(args);
 
-    if (_validFlagsOrOptionsPassed(cli)) {
-      // show help
-      if (cli['help']) {
-        _help(app.usage);
-      }
-
-      // show version
-      if (cli['version']) {
-        _version();
-      }
-
-      // list versions
-      if (cli['list']) {
-        await _printAvailableVersions();
-      }
-
-      var edition = cli['edition'];
-
-      final format = cli['format'],
-          writeTo = cli['writeTo'],
-          interactive = cli['interactive'];
-
-      // if `--edition` is not passed
-      if (edition == null) {
-        final versionSpinner = _spinner('Fetching available versions ...');
-
-        final versions = await scraper.fetchAvailableVersions();
-
-        versionSpinner.done();
-
-        // if `--interactive` is passed
-        if (interactive == true) {
-          // prompt user to select from available versions
-          final selection = Select(
-            prompt: 'Select version of emoji',
-            options: versions,
-          ).interact();
-
-          edition = versions[selection];
-        } else {
-          // just select latest available version if `--interactive` is not passed
-          edition = versions.first;
-        }
-      }
-
-      final downloadSpinner = _spinner('Downloading ...');
-
-      final data = await scraper.fetchEmojiData(edition);
-
-      downloadSpinner.done();
-
-      switch (writeTo) {
-        case "path":
-          String? emoji;
-          File? file;
-
-          switch (format) {
-            case "json":
-              file = await File('$edition-emoji-sequences.json').create();
-              emoji = scraper.parseTextToJson(data);
-              break;
-            case "raw":
-              file = await File('$edition-emoji-sequences.txt').create();
-              emoji = data;
-              break;
-            default:
-              _invalidState();
-          }
-
-          await file.writeAsString(emoji, flush: true);
-
-          break;
-        case "stdout":
-          switch (format) {
-            case "json":
-              final json = scraper.parseTextToJson(data);
-              print(json);
-              break;
-            case "raw":
-              print(data);
-              break;
-            default:
-              _invalidState();
-          }
-          break;
-        default:
-          _invalidState();
-      }
-    } else {
+    if (_validFlagsOrOptionsPassed(cli) == false) {
       _printNoArgsHelp();
+    }
+
+    // show help
+    if (cli['help']) {
+      _help(app.usage);
+    }
+
+    // show version
+    if (cli['version']) {
+      _version();
+    }
+
+    // list versions
+    if (cli['list']) {
+      await _printAvailableVersions();
+    }
+
+    var edition = cli['edition'];
+
+    final format = cli['format'],
+        writeTo = cli['writeTo'],
+        interactive = cli['interactive'];
+
+    edition ??= await _getEdition(interactive);
+
+    final downloadSpinner = _spinner('Downloading ...');
+
+    final data = await scraper.fetchEmojiData(edition);
+
+    downloadSpinner.done();
+
+    switch (writeTo) {
+      case "path":
+        String? emoji;
+        File? file;
+
+        switch (format) {
+          case "json":
+            file = await File('$edition-emoji-sequences.json').create();
+            emoji = scraper.parseTextToJson(data);
+            break;
+          case "raw":
+            file = await File('$edition-emoji-sequences.txt').create();
+            emoji = data;
+            break;
+          default:
+            _invalidState();
+        }
+
+        await file.writeAsString(emoji, flush: true);
+
+        break;
+      case "stdout":
+        switch (format) {
+          case "json":
+            final json = scraper.parseTextToJson(data);
+            print(json);
+            break;
+          case "raw":
+            print(data);
+            break;
+          default:
+            _invalidState();
+        }
+        break;
+      default:
+        _invalidState();
     }
   } catch (e) {
     _printAllErrors(e);
